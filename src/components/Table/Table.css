@@ -1,10 +1,11 @@
 table {
     width: 100%;
-    max-width: 1400px;
     border-collapse: collapse;
     border: 1px solid #d0d7de;
     border-radius: 6px;
     overflow: hidden;
+    table-layout: fixed;
+    max-width: 1400px;
 }
 
 thead tr {
@@ -12,11 +13,19 @@ thead tr {
     border-bottom: 1px solid #d0d7de;
 }
 
+thead th {
+    cursor: pointer;
+}
+
 th, td {
     padding: 12px 16px;
     text-align: left;
     border-right: 1px solid #d0d7de;
     vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
 }
 
 th:last-child,
@@ -26,10 +35,9 @@ td:last-child {
 
 th {
     user-select: none;
-    cursor: pointer;
+    min-width: 50px;
     font-weight: 600;
     color: #57606a;
-    position: relative;
     transition: background-color 0.2s ease;
 }
 
@@ -46,4 +54,14 @@ th span {
     font-size: 12px;
     color: #57606a;
     user-select: none;
+}
+th div {
+    background: transparent;
+}
+
+@media (max-width: 600px) {
+    table {
+        display: block;
+        overflow-x: auto;
+    }
 }
