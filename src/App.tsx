@@ -13,7 +13,7 @@ const LIMIT = 10;
 function App() {
   const [userData, setUserData] = useState<User[]>([]);
   const [currentPage, setCurrentPage] = useState(
-    Number(localStorage.getItem("current_page")),
+    Number(localStorage.getItem("current_page") || 1),
   );
   const [sortConfig, setSortConfig] = useState<{
     key: keyof User | keyof Address;
