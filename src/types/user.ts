@@ -1,6 +1,9 @@
 export interface Address {
     city: string;
     country: string;
+    address: string;
+    state: string;
+    postalCode: string;
 }
 
 export interface User {
@@ -12,4 +15,7 @@ export interface User {
     phone: string;
     email: string;
     address: Address;
+    image: string;
+    height: number;
+    weight: number;
 }

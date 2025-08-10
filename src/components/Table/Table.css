@@ -43,6 +43,7 @@ th {
 
 tbody tr {
     border-bottom: 1px solid #d0d7de;
+    cursor: pointer;
 }
 
 tbody tr:last-child {

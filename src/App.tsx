@@ -6,6 +6,7 @@ import {getUsers} from "./api/usersApi.ts";
 import Pagination from "./components/Pagination/Pagination.tsx";
 import type {SortOrder} from "./types/sort.ts";
 import FilterBox from "./components/FilterBox/FilterBox.tsx";
+import UserModal from "./components/UserModal/UserModal.tsx";
 
 const LIMIT = 10;
 
@@ -14,7 +15,7 @@ function App() {
     const [currentPage, setCurrentPage] = useState(Number(localStorage.getItem("current_page")));
     const [sortConfig, setSortConfig] = useState<{ key: keyof User | keyof Address; order: SortOrder } | null>(null);
     const [filterConfig, setFilterConfig] = useState<{ key: keyof User; value: string } | null>(null);
-
+    const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
     useEffect(() => {
         if (!currentPage) {
@@ -53,8 +54,9 @@ function App() {
   return (
     <>
         <FilterBox onFilterChange={handleFilter} />
-        <Table data={userData} onSort={handleSort} sortConfig={sortConfig} />
+        <Table data={userData} onSort={handleSort} sortConfig={sortConfig} onRowClick={setSelectedUser} />
         <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <UserModal user={selectedUser} onClose={() => setSelectedUser(null)} />
     </>
   )
 }

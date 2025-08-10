@@ -9,6 +9,7 @@ interface TableProps {
     data: any[]
     onSort: (key: keyof User | keyof Address) => void;
     sortConfig: { key: keyof User | keyof Address; order: SortOrder } | null;
+    onRowClick: (user: User) => void;
 }
 
 
@@ -33,7 +34,7 @@ const sortableColumns: (keyof User)[] = [
     'phone'
 ];
 
-export default function Table({ data = [], onSort, sortConfig }: TableProps) {
+export default function Table({ data = [], onSort, sortConfig, onRowClick }: TableProps) {
     const [colWidths, setColWidths] = useState<Record<string, number>>(() => {
         const initial: Record<string, number> = {};
         tableColumns.forEach((col) => {
@@ -127,7 +128,7 @@ export default function Table({ data = [], onSort, sortConfig }: TableProps) {
             </thead>
             <tbody>
             {data.map((row, rowIndex) => (
-                <tr key={row.id ?? rowIndex}>
+                <tr key={row.id ?? rowIndex} onClick={() => onRowClick(row)}>
                     {tableColumns.map(col => (
                         <td key={col.key}>{getCellValue(row, col.key)}</td>
                     ))}
