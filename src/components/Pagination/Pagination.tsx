@@ -1,3 +1,4 @@
+import "./Pagination.css";
 import {useState} from "react";
 
 interface PaginationProps {
@@ -17,12 +18,13 @@ export default function Pagination({ currentPage, setCurrentPage }: PaginationPr
         localStorage.setItem('current_page', page.toString());
     }
     return (
-        <>
+        <div className="pagination">
             <button onClick={() => handlePageChange(currentPage - 1)}>
                 Назад
             </button>
             <input
                 type="number"
+
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onBlur={() => handlePageChange(Number(inputValue))}
@@ -31,6 +33,6 @@ export default function Pagination({ currentPage, setCurrentPage }: PaginationPr
             <button onClick={() => handlePageChange(currentPage + 1)}>
                 Вперед
             </button>
-        </>
+        </div>
     );
 }

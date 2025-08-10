@@ -43,7 +43,7 @@ function App() {
 
   return (
     <>
-        <Table data={userData} onSort={handleSort} />
+        <Table data={userData} onSort={handleSort} sortConfig={sortConfig} />
         <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </>
   )
