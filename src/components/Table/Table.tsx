@@ -1,8 +1,10 @@
 import "./Table.css";
 import type {TableHeaders} from "../../types/table.ts";
+import type {Address, User} from "../../types/user.ts";
 
 interface TableProps {
     data: any[]
+    onSort: (key: keyof User | keyof Address) => void;
 }
 
 const tableColumns: TableHeaders[] = [
@@ -16,7 +18,7 @@ const tableColumns: TableHeaders[] = [
     { key: "country", label: 'Страна' },
 ];
 
-export default function Table({ data = []}: TableProps) {
+export default function Table({ data = [], onSort}: TableProps) {
     function getCellValue(row: any, key: string) {
         if (key === 'city') return row.address?.city ?? '';
         if (key === 'country') return row.address?.country ?? '';
@@ -29,7 +31,7 @@ export default function Table({ data = []}: TableProps) {
             <tr>
                 {tableColumns.map((col) => (
                     <th
-                        key={col.key}
+                        key={col.key} onClick={() => onSort(col.key)}
                     >
                         {col.label}
                     </th>

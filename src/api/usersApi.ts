@@ -1,12 +1,12 @@
 import type {SortOrder} from "../types/sort.ts";
-import type {User} from "../types/user.ts";
+import type {Address, User} from "../types/user.ts";
 
 const API_URL = 'https://dummyjson.com/users';
 
 export const getUsers = async (
     limit: number,
     skip: number,
-    sortParam?: keyof User,
+    sortParam?: keyof User | keyof Address,
     sortOrder?: SortOrder,
     filterParam?: keyof User,
     filterValue?: string
