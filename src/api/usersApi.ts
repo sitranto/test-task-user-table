@@ -1,7 +1,7 @@
 import type {SortOrder} from "../types/sort.ts";
 import type {Address, User} from "../types/user.ts";
 
-const API_URL = 'https://dummyjson.com/users';
+const BASE_API_URL = 'https://dummyjson.com/users';
 
 export const getUsers = async (
     limit: number,
@@ -26,7 +26,11 @@ export const getUsers = async (
         params.append('value', filterValue);
     }
 
-    const res = await fetch(`${API_URL}?${params.toString()}`);
+    const url = filterParam && filterValue
+        ? `${BASE_API_URL}/filter?${params.toString()}`
+        : `${BASE_API_URL}?${params.toString()}`;
+
+    const res = await fetch(url);
 
     if (!res.ok) {
         throw new Error(
