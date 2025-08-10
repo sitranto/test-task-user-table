@@ -6,11 +6,11 @@ const API_URL = 'https://dummyjson.com/users';
 export const getUsers = async (
     limit: number,
     skip: number,
-    sortParam: keyof User,
-    sortOrder: SortOrder,
-    filterParam: keyof User,
-    filterValue: string
-): Promise<User[]> => {
+    sortParam?: keyof User,
+    sortOrder?: SortOrder,
+    filterParam?: keyof User,
+    filterValue?: string
+) => {
     const params = new URLSearchParams({
         limit: String(limit),
         skip: String(skip),
