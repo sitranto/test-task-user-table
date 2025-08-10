@@ -1,3 +1,3 @@
-import type {Address, User} from "./user.ts";
+import type { Address, User } from "./user.ts";
 
-export type TableHeaders = { key: keyof User | keyof Address, label: string };
+export type TableHeaders = { key: keyof User | keyof Address; label: string };
