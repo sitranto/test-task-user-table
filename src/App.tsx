@@ -16,6 +16,7 @@ function App() {
     const [sortConfig, setSortConfig] = useState<{ key: keyof User | keyof Address; order: SortOrder } | null>(null);
     const [filterConfig, setFilterConfig] = useState<{ key: keyof User; value: string } | null>(null);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         if (!currentPage) {
@@ -24,16 +25,20 @@ function App() {
     }, []);
 
     useEffect(() => {
-        getUsers(
-            LIMIT,
-            (currentPage - 1) * LIMIT,
-            sortConfig?.key,
-            sortConfig?.order,
-            filterConfig?.key,
-            filterConfig?.value
-        ).then((data) => {
-            setUserData(data.users);
-        });
+        try {
+            getUsers(
+                LIMIT,
+                (currentPage - 1) * LIMIT,
+                sortConfig?.key,
+                sortConfig?.order,
+                filterConfig?.key,
+                filterConfig?.value
+            ).then((data) => {
+                setUserData(data.users);
+            });
+        }   catch (e: any) {
+            setError(e.message || 'Что-то пошло не так');
+        }
     }, [currentPage, sortConfig, filterConfig]);
 
     function handleSort(key: keyof User | keyof Address) {
@@ -53,6 +58,7 @@ function App() {
 
   return (
     <>
+        {error && <div className="error">{error}</div>}
         <FilterBox onFilterChange={handleFilter} />
         <Table data={userData} onSort={handleSort} sortConfig={sortConfig} onRowClick={setSelectedUser} />
         <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />

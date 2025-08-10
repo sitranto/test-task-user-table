@@ -3,3 +3,12 @@
   margin: 0 auto;
   text-align: center;
 }
+
+.error {
+  padding: 12px;
+  margin: 16px 0;
+  background: #ffdddd;
+  color: #a00;
+  border: 1px solid #a00;
+  border-radius: 6px;
+}
